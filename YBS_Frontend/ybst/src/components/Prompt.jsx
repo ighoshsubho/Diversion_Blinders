@@ -32,7 +32,8 @@ const getPrompts = async () => {
       {
           headers: { Authorization: "Bearer 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" },
           method: "POST",
-          inputs: prompt
+          inputs: prompt,
+          max_return_sequences: 4
       },
       { responseType: "text" }
   );
