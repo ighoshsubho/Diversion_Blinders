@@ -16,11 +16,33 @@ function Prompt() {
   const [error1, setError1] = useState(null);
   const [model, setModel] = useState('EleutherAI/gpt-j-6B')
 
+  const [change, setChange] = useState(false);
+
   const logout = () => {
     sessionStorage.removeItem('Token')
     sessionStorage.removeItem('uid')
     router.push('/login')
 }
+
+const cohere = require('cohere-ai');
+cohere.init('vPeFqvj73Z7fMyFDb99H27sbt1fSIQN44uqCu5TG');
+const cohereGetLinkedInPostGenerator = async () => {
+  const response = await cohere.generate({
+    model: 'command-xlarge-nightly',
+    prompt: prompt,
+    max_tokens: 300,
+    temperature: 0.9,
+    k: 0,
+    p: 0.75,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    stop_sequences: [],
+    return_likelihoods: 'NONE'
+  });
+setResult(`${response.body.generations[0].text}`);
+};
+
+
 
 let router = useRouter();
 
@@ -28,7 +50,7 @@ const getPrompts = async () => {
   setLoading1(true);
   try{
   const response = await axios.post(
-      `https://api-inference.huggingface.co/models/Gustavosta/MagicPrompt-Stable-Diffusion`,
+      `https://api-inference.huggingface.co/models/merve/chatgpt-prompts-bart-long`,
       {
           headers: { Authorization: "Bearer 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" },
           method: "POST",
@@ -92,7 +114,9 @@ return (
               >
                   Next
               </button>
-              {loading && <p>Loading...</p>}
+              {loading && <p>Loading...</p> && setPrompt(result)}
+              <button onClick={cohereGetLinkedInPostGenerator}></button>
+              
           </div>
           {imageBlob && (
               <div className="flex flex-col gap-4 items-center justify-center">
@@ -108,6 +132,7 @@ return (
                     >
                         Next
                     </button>
+
                     {error && <span className="">Bad Response!</span>}
 
                     {loading1 && <p>Loading...</p>}
