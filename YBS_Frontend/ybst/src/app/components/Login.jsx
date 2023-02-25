@@ -94,9 +94,6 @@ const Login = () => {
                 Wrong email or password!
               </span>
             )}
-            <Button onClick={signInWithGoogle} type="submit">
-              Login With Google
-            </Button>
             {error && (
               <span className="font-light text-red-600 mt-[10px] flex justify-center">
                 Wrong email or password!
