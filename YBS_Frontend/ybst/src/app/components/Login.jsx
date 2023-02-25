@@ -19,13 +19,10 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         sessionStorage.setItem("Token", userCredential.user.accessToken);
         sessionStorage.setItem("uid", userCredential.user.uid);
         router.push("/");
-        // dispatch({type:"LOGIN", payload:user})
-        // navitage("/");
       })
       .catch((error) => {
         setError(true);
@@ -42,8 +39,11 @@ const Login = () => {
 
   return (
     <Hero>
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-3xl font-bold mb-4">Login</h1>
+      <div className="mx-auto flex w-full max-w-sm flex-col gap-6">
+        <div className="flex flex-col items-center">
+          <h1 className="text-3xl font-semibold">Sign In</h1>
+          <p className="text-sm">Sign in to access your account</p>
+        </div>
 
         <form className="w-1/3" onSubmit={handleLogin}>
           <div className="mb-4">
@@ -94,9 +94,9 @@ const Login = () => {
                 Wrong email or password!
               </span>
             )}
-            <Button onClick={signInWithGoogle} type="submit">
+            {/* <Button onClick={signInWithGoogle} type="submit">
               Login With Google
-            </Button>
+            </Button> */}
             {error && (
               <span className="font-light text-red-600 mt-[10px] flex justify-center">
                 Wrong email or password!
