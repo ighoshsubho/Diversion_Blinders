@@ -1,10 +1,9 @@
-// import CreatePost from "@/components/CreatePost";
-import React from "react";
+import SampleCohere from "@/components/SampleCohere";
 
 const service = () => {
   return (
     <div>
-      {/* //<CreatePost /> */}
+      <SampleCohere/>
       <p>Hi</p>
     </div>
   );

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
-function CreatePost() {
+function SampleCohere() {
   const [prompt, setPrompt] = useState("");
   const [imageBlob, setImageBlob] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -48,35 +48,35 @@ const generateText = async () => {
 }
 
 const generateArt = async () => {
-  setLoading(true)
-  try {
-      const response = await axios.post(
-          `https://mean-eggs-dream-34-124-168-229.loca.lt/text2img`,
-          {
-
-              "prompt": prompt,
-              "negative_prompt": "string",
-              "scheduler": "EulerAncestralDiscreteScheduler",
-              "image_height": 512,
-              "image_width": 512,
-              "num_images": 1,
-              "guidance_scale": 7,
-              "steps": 50,
-              "seed": 42,
-
-
-          }
-      );
-      (JSON.stringify(response.data.images))
-
-      setImageBlob(response.data.images);
-  } catch (err) {
-      console.log(err);
-      setError(true)
-  } finally {
-      setLoading(false)
-  }
-};
+    setLoading(true)
+    try {
+        const response = await axios.post(
+            `https://mean-eggs-dream-34-124-168-229.loca.lt/text2img`,
+            {
+  
+                "prompt": prompt,
+                "negative_prompt": "string",
+                "scheduler": "EulerAncestralDiscreteScheduler",
+                "image_height": 512,
+                "image_width": 512,
+                "num_images": 1,
+                "guidance_scale": 7,
+                "steps": 50,
+                "seed": 42,
+  
+  
+            }
+        );
+        (JSON.stringify(response.data.images))
+  
+        setImageBlob(response.data.images);
+    } catch (err) {
+        console.log(err);
+        setError(true)
+    } finally {
+        setLoading(false)
+    }
+  };
 
 const getTextFromImage = async () => {
   setLoading1(true);
@@ -100,6 +100,73 @@ const getTextFromImage = async () => {
       setLoading1(false)
   }
 }
+
+const cohere = require('cohere-ai');
+cohere.init('Rsim8Ri5ouWWP6L3Q0t1LuoUAujSG1Hq3E6ERnDm'); // This is your trial API key
+const cohereGetParagraphGenerator = async () => {
+  const response = await cohere.generate({
+    model: 'command-xlarge-nightly',
+    prompt: prompt,
+    max_tokens: 300,
+    temperature: 0.9,
+    k: 0,
+    p: 0.75,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    stop_sequences: [],
+    return_likelihoods: 'NONE'
+  });
+  setResult(`${response.body.generations}`);
+};
+
+
+const cohereGetLinkedInPostGenerator = async () => {
+    const response = await cohere.generate({
+      model: 'command-xlarge-nightly',
+      prompt: prompt,
+      max_tokens: 300,
+      temperature: 0.9,
+      k: 0,
+      p: 0.75,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      stop_sequences: [],
+      return_likelihoods: 'NONE'
+    });
+  setResult(`${response.body.generations}`);
+};
+
+const cohereBlogPostGenerator = async () => {
+  const response = await cohere.generate({
+    model: 'command-xlarge-nightly',
+    prompt: prompt,
+    max_tokens: 300,
+    temperature: 0.9,
+    k: 0,
+    p: 0.75,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    stop_sequences: [],
+    return_likelihoods: 'NONE'
+  });
+  setResult(`${response.body.generations}`);
+};
+
+const cohereBlogPostIntro = async () => {
+    const response = await cohere.generate({
+        model: 'command-xlarge-nightly',
+        prompt: prompt,
+        max_tokens: 300,
+        temperature: 0.9,
+        k: 0,
+        p: 0.75,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        stop_sequences: [],
+        return_likelihoods: 'NONE'
+      });
+    setResult(`${response.body.generations}`);
+  };
 
     console.log(prompt)
     console.log(model)
@@ -133,7 +200,7 @@ return (
       </div>
       <div className="flex flex-col justify-center items-center">
                     <button
-                        onClick={generateText}
+                        onClick={cohereBlogPostIntro}
                         className="bg-[#2fd12f] text-white rounded-md p-3"
                     >
                         Next
@@ -147,4 +214,4 @@ return (
 );
 }
 
-export default CreatePost;
+export default SampleCohere;
