@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 "use client";
+=======
+>>>>>>> af315f4d4dac6abf545b2cf9ff879f1b6b57807b
 import axios from "axios";
 import Image from "next/image";
 
@@ -16,6 +19,10 @@ function CreatePost() {
   const [error1, setError1] = useState(null);
   const [model, setModel] = useState("EleutherAI/gpt-j-6B");
 
+  const [error2, setError2] = useState(null);
+  const [loading2, setLoading2] = useState(false);
+  const [result1, setResult1] = useState('')
+
   const logout = () => {
     sessionStorage.removeItem("Token");
     sessionStorage.removeItem("uid");
@@ -24,15 +31,36 @@ function CreatePost() {
 
   let router = useRouter();
 
-  const generateText = async () => {
-    setLoading1(true);
-    try {
-      const response = await axios.post(
-        `https://api-inference.huggingface.co/models/${model}`,
+const getPromptForStableDiffusion = async () => {
+    setLoading2(true);
+    try{
+    const response = await axios.post(
+        `https://api-inference.huggingface.co/models/Gustavosta/MagicPrompt-Stable-Diffusion`,
         {
-          headers: {
-            Authorization: "Bearer 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",
-          },
+            headers: { Authorization: "Bearer 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" },
+            method: "POST",
+            inputs: prompt
+        },
+        { responseType: "text" }
+    );
+    setResult1(response.data);
+    }
+    catch (err){
+        console.log(err);
+        setError2(true)
+    }
+    finally{
+        setLoading2(false)
+    }
+  }
+
+const generateText = async () => {
+  setLoading1(true);
+  try{
+  const response = await axios.post(
+      `https://api-inference.huggingface.co/models/${model}`,
+      {
+          headers: { Authorization: "Bearer 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" },
           method: "POST",
           inputs: prompt,
         },

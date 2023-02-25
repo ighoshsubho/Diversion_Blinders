@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
-function SampleCohere() {
+function Prompt() {
   const [prompt, setPrompt] = useState("");
   const [imageBlob, setImageBlob] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -23,6 +23,29 @@ function SampleCohere() {
 }
 
 let router = useRouter();
+
+const getPrompts = async () => {
+  setLoading1(true);
+  try{
+  const response = await axios.post(
+      `https://api-inference.huggingface.co/models/Gustavosta/MagicPrompt-Stable-Diffusion`,
+      {
+          headers: { Authorization: "Bearer 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" },
+          method: "POST",
+          inputs: prompt
+      },
+      { responseType: "text" }
+  );
+  setResult(response.data);
+  }
+  catch (err){
+      console.log(err);
+      setError1(true)
+  }
+  finally{
+      setLoading1(false)
+  }
+}
 
 const generateText = async () => {
   setLoading1(true);
@@ -47,119 +70,6 @@ const generateText = async () => {
   }
 }
 
-const generateTextFromPrompt = async () => {
-    setLoading(true)
-    try {
-        const response = await axios.post(
-            `https://mean-eggs-dream-34-124-168-229.loca.lt/text2img`,
-            {
-                headers: { Authorization: "Bearer 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" },
-                method: "POST",
-                inputs: prompt,
-            },
-            { responseType: "text" }
-        );
-        setResult(response.data);
-        }
-        catch (err){
-            console.log(err);
-            setError1(true)
-        }
-        finally{
-            setLoading1(false)
-        }
-      }
-
-const getTextFromImage = async () => {
-  setLoading1(true);
-  try{
-  const response = await axios.post(
-      `https://api-inference.huggingface.co/models/${model}`,
-      {
-          headers: { Authorization: "Bearer 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" },
-          method: "POST",
-          inputs: prompt,
-      },
-      { responseType: "text" }
-  );
-  setResult(response.data);
-  }
-  catch (err){
-      console.log(err);
-      setError1(true)
-  }
-  finally{
-      setLoading1(false)
-  }
-}
-
-const cohere = require('cohere-ai');
-cohere.init('vPeFqvj73Z7fMyFDb99H27sbt1fSIQN44uqCu5TG'); // This is your trial API key
-const cohereGetParagraphGenerator = async () => {
-  const response = await cohere.generate({
-    model: 'command-xlarge-nightly',
-    prompt: prompt,
-    max_tokens: 300,
-    temperature: 0.9,
-    k: 0,
-    p: 0.75,
-    frequency_penalty: 0,
-    presence_penalty: 0,
-    stop_sequences: [],
-    return_likelihoods: 'NONE'
-  });
-  setResult(`${response.body.generations[0].text}`);
-};
-
-
-const cohereGetLinkedInPostGenerator = async () => {
-    const response = await cohere.generate({
-      model: 'command-xlarge-nightly',
-      prompt: prompt,
-      max_tokens: 300,
-      temperature: 0.9,
-      k: 0,
-      p: 0.75,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-      stop_sequences: [],
-      return_likelihoods: 'NONE'
-    });
-  setResult(`${response.body.generations[0].text}`);
-};
-
-const cohereBlogPostGenerator = async () => {
-  const response = await cohere.generate({
-    model: 'command-xlarge-nightly',
-    prompt: prompt,
-    max_tokens: 300,
-    temperature: 0.9,
-    k: 0,
-    p: 0.75,
-    frequency_penalty: 0,
-    presence_penalty: 0,
-    stop_sequences: [],
-    return_likelihoods: 'NONE'
-  });
-  setResult(`${response.body.generations[0].text}`);
-};
-
-const cohereBlogPostIntro = async () => {
-    const response = await cohere.generate({
-        model: 'command-xlarge-nightly',
-        prompt: prompt,
-        max_tokens: 300,
-        temperature: 0.9,
-        k: 0,
-        p: 0.75,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-        stop_sequences: [],
-        return_likelihoods: 'NONE'
-      });
-    setResult(`${response.body.generations[0].text}`);
-  };
-
     console.log(prompt)
     console.log(model)
     console.log(result)
@@ -176,6 +86,7 @@ return (
                   placeholder="Enter a prompt"
               />
               <button
+                  onClick={getPrompts}
                   className="bg-black text-white rounded-md p-2"
               >
                   Next
@@ -191,11 +102,13 @@ return (
       </div>
       <div className="flex flex-col justify-center items-center">
                     <button
-                        onClick={cohereBlogPostIntro}
+                        onClick={getPrompts}
                         className="bg-[#2fd12f] text-white rounded-md p-3"
                     >
                         Next
                     </button>
+                    {error && <span className="">Bad Response!</span>}
+
                     {loading1 && <p>Loading...</p>}
 
                     {!loading1 && console.log(result)}
@@ -205,4 +118,4 @@ return (
 );
 }
 
-export default SampleCohere;
+export default Prompt;
