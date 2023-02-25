@@ -31,7 +31,7 @@ const getPromptForStableDiffusion = async () => {
     setLoading2(true);
     try{
     const response = await axios.post(
-        `https://api-inference.huggingface.co/models/Gustavosta/MagicPrompt-Stable-Diffusion`,
+        `https://api-inference.huggingface.co/models/merve/chatgpt-prompts-bart-long`,
         {
             headers: { Authorization: "Bearer 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" },
             method: "POST",
@@ -104,29 +104,6 @@ const generateArt = async () => {
   }
 };
 
-const getTextFromImage = async () => {
-  setLoading1(true);
-  try{
-  const response = await axios.post(
-      `https://api-inference.huggingface.co/models/${model}`,
-      {
-          headers: { Authorization: "Bearer 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" },
-          method: "POST",
-          inputs: prompt,
-      },
-      { responseType: "text" }
-  );
-  setResult(response.data);
-  }
-  catch (err){
-      console.log(err);
-      setError1(true)
-  }
-  finally{
-      setLoading1(false)
-  }
-}
-
     console.log(prompt)
     console.log(model)
     console.log(result)
@@ -143,12 +120,13 @@ return (
                   placeholder="Enter a prompt"
               />
               <button
-                  onClick={generateArt}
+                  onClick={getPromptForStableDiffusion}
                   className="bg-black text-white rounded-md p-2"
               >
                   Next
               </button>
-              {loading && <p>Loading...</p>}
+              {!loading && <p>Loading...</p>}
+              {loading ? <p>Loading...</p> : generateArt}
           </div>
           {imageBlob && (
               <div className="flex flex-col gap-4 items-center justify-center">
