@@ -9,7 +9,7 @@ const randomNumberBetween = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-export const HeroImage = ({ params }) => {
+export const HeroImage = ({ params, width, height }) => {
   const { ref, inView } = useInView({ threshold: 0.4, triggerOnce: true });
   const [lines, setLines] = useState([]);
   const timeoutRef = useRef(null);
@@ -98,8 +98,8 @@ export const HeroImage = ({ params }) => {
             )}
             src={params}
             alt="Hero image"
-            width={1920}
-            height={1200}
+            width={width}
+            height={height}
           />
         </div>
       </div>

@@ -2,8 +2,9 @@
 import Typewriter from "typewriter-effect";
 import React from "react";
 import { Hero, HeroSubtitle, HeroTitle } from "./Hero/herotitle";
-import { HeroImage } from "./Hero/heroimage";
 
+import Desktop from "/src/app/assets/desktop.png";
+import { HeroImage } from "./Hero/heroimage";
 const About = () => {
   return (
     <Hero>
@@ -23,7 +24,9 @@ const About = () => {
           }
         </div>
       </HeroTitle>
-      <HeroImage />
+
+      <HeroImage params={Desktop} width={500} height={500} />
+
       <HeroSubtitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
         We are the most fantastic team of the world. Yes we are
         <br className="hidden md:block" /> that helps the lives of people easy

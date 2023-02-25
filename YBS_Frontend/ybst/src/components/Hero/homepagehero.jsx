@@ -23,6 +23,6 @@ export const HomepageHero = () => (
     >
       <span>Get Started </span> */}
     {/* </Button> */}
-    <HeroImage params={HeroImage} />
+    <HeroImage params={Heroimage} width={1920} height={1200} />
   </Hero>
 );
