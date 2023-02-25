@@ -1,7 +1,16 @@
 import classNames from "classnames";
 
 export const HeroTitle = ({ children, className }) => {
-  return <h1>{children}</h1>;
+  return (
+    <h1
+      className={classNames(
+        "text-gradient font-[Gajraj One] my-6 text-6xl md:text-8xl",
+        className
+      )}
+    >
+      {children}
+    </h1>
+  );
 };
 
 export const HeroSubtitle = ({ children, className }) => {
