@@ -3,7 +3,6 @@ import classNames from "classnames";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-// import Heroimage from "/src/app/assets/heroimage.webp";
 
 const randomNumberBetween = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
