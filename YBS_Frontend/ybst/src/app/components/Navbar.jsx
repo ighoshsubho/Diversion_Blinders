@@ -7,6 +7,7 @@ import classNames from "classnames";
 import Image from "next/image";
 import { Container } from "./container";
 import { Button } from "./Button";
+import Logo from "/src/app/assets/logo.webp";
 
 export const Navbar = () => {
   return (
@@ -23,12 +24,7 @@ export const Navbar = () => {
                 "fixed top-navigation-height left-0 h-[calc(100vh_-_var(--navigation-height))] w-full overflow-auto bg-background transition-opacity duration-500 md:relative md:top-0 md:block md:h-auto md:w-auto md:translate-x-0 md:overflow-hidden md:bg-transparent md:opacity-100 md:transition-none"
               )}
             >
-              <ul
-                className={classNames(
-                  "flex h-full flex-col md:flex-row md:items-center [&_li]:ml-6 [&_li]:border-b [&_li]:border-grey-dark md:[&_li]:border-none",
-                  "ease-in [&_a:hover]:text-grey [&_a]:flex [&_a]:h-10 [&_a]:w-full [&_a]:translate-y-8 [&_a]:items-center [&_a]:text-lg [&_a]:transition-[color,transform] [&_a]:duration-300 md:[&_a]:translate-y-0 md:[&_a]:text-sm [&_a]:md:transition-colors"
-                )}
-              >
+              <ul>
                 <li>
                   <Link href="/about">About Us</Link>
                 </li>
