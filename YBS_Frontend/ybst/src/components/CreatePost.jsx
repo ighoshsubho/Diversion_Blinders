@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 "use client";
-=======
->>>>>>> af315f4d4dac6abf545b2cf9ff879f1b6b57807b
 import axios from "axios";
 import Image from "next/image";
 
@@ -21,7 +18,7 @@ function CreatePost() {
 
   const [error2, setError2] = useState(null);
   const [loading2, setLoading2] = useState(false);
-  const [result1, setResult1] = useState('')
+  const [result1, setResult1] = useState("");
 
   const logout = () => {
     sessionStorage.removeItem("Token");
@@ -31,36 +28,38 @@ function CreatePost() {
 
   let router = useRouter();
 
-const getPromptForStableDiffusion = async () => {
+  const getPromptForStableDiffusion = async () => {
     setLoading2(true);
-    try{
-    const response = await axios.post(
+    try {
+      const response = await axios.post(
         `https://api-inference.huggingface.co/models/Gustavosta/MagicPrompt-Stable-Diffusion`,
         {
-            headers: { Authorization: "Bearer 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" },
-            method: "POST",
-            inputs: prompt
+          headers: {
+            Authorization: "Bearer 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",
+          },
+          method: "POST",
+          inputs: prompt,
         },
         { responseType: "text" }
-    );
-    setResult1(response.data);
+      );
+      setResult1(response.data);
+    } catch (err) {
+      console.log(err);
+      setError2(true);
+    } finally {
+      setLoading2(false);
     }
-    catch (err){
-        console.log(err);
-        setError2(true)
-    }
-    finally{
-        setLoading2(false)
-    }
-  }
+  };
 
-const generateText = async () => {
-  setLoading1(true);
-  try{
-  const response = await axios.post(
-      `https://api-inference.huggingface.co/models/${model}`,
-      {
-          headers: { Authorization: "Bearer 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" },
+  const generateText = async () => {
+    setLoading1(true);
+    try {
+      const response = await axios.post(
+        `https://api-inference.huggingface.co/models/${model}`,
+        {
+          headers: {
+            Authorization: "Bearer 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",
+          },
           method: "POST",
           inputs: prompt,
         },

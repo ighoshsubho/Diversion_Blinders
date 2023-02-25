@@ -13,7 +13,10 @@ const About = () => {
   return (
     <Hero>
       <HeroTitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-        <div className="py-15">
+        <div
+          className="py-15  rounded-lg border border-transparent-white bg-white bg-opacity-[0.01] bg-hero-gradient
+          "
+        >
           {
             <>
               We are
@@ -30,7 +33,11 @@ const About = () => {
       </HeroTitle>
 
       {/* <HeroImage params={Desktop} width={500} height={500} /> */}
-      <div className="flex justify-center bg-hero-gradient">
+      <div
+        className="flex justify-center bg-hero-gradient  rounded-lg border border-transparent-white bg-white bg-opacity-[0.01] bg-hero-gradient
+          before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-hero-glow before:opacity-0 before:[filter:blur(120px)]
+          before:animate-image-glow"
+      >
         <Lottie animationData={teamAnimation} loop={true} />
       </div>
       <HeroSubtitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">

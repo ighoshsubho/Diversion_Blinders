@@ -1,13 +1,19 @@
 // import { Button, Highlight } from "../button";
 import Heroimage from "/src/app/assets/heroimage.webp";
 import { HeroImage } from "./heroimage";
+import { Raleway } from "@next/font/google";
+
+const raleway = Raleway({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 import { Hero, HeroSubtitle, HeroTitle } from "./herotitle";
 
 export const HomepageHero = () => (
   <Hero>
-    <HeroTitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-      <div className="py-15">
+    <HeroTitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms] ">
+      <div className="raleway py-15">
         YOUR brand STORIES
         <br className="hidden md:block" /> Be the Creator
       </div>
