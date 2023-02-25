@@ -47,36 +47,28 @@ const generateText = async () => {
   }
 }
 
-const generateArt = async () => {
+const generateTextFromPrompt = async () => {
     setLoading(true)
     try {
         const response = await axios.post(
             `https://mean-eggs-dream-34-124-168-229.loca.lt/text2img`,
             {
-  
-                "prompt": prompt,
-                "negative_prompt": "string",
-                "scheduler": "EulerAncestralDiscreteScheduler",
-                "image_height": 512,
-                "image_width": 512,
-                "num_images": 1,
-                "guidance_scale": 7,
-                "steps": 50,
-                "seed": 42,
-  
-  
-            }
+                headers: { Authorization: "Bearer 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" },
+                method: "POST",
+                inputs: prompt,
+            },
+            { responseType: "text" }
         );
-        (JSON.stringify(response.data.images))
-  
-        setImageBlob(response.data.images);
-    } catch (err) {
-        console.log(err);
-        setError(true)
-    } finally {
-        setLoading(false)
-    }
-  };
+        setResult(response.data);
+        }
+        catch (err){
+            console.log(err);
+            setError1(true)
+        }
+        finally{
+            setLoading1(false)
+        }
+      }
 
 const getTextFromImage = async () => {
   setLoading1(true);
@@ -102,7 +94,7 @@ const getTextFromImage = async () => {
 }
 
 const cohere = require('cohere-ai');
-cohere.init('Rsim8Ri5ouWWP6L3Q0t1LuoUAujSG1Hq3E6ERnDm'); // This is your trial API key
+cohere.init('vPeFqvj73Z7fMyFDb99H27sbt1fSIQN44uqCu5TG'); // This is your trial API key
 const cohereGetParagraphGenerator = async () => {
   const response = await cohere.generate({
     model: 'command-xlarge-nightly',
@@ -116,7 +108,7 @@ const cohereGetParagraphGenerator = async () => {
     stop_sequences: [],
     return_likelihoods: 'NONE'
   });
-  setResult(`${response.body.generations}`);
+  setResult(`${response.body.generations[0].text}`);
 };
 
 
@@ -133,7 +125,7 @@ const cohereGetLinkedInPostGenerator = async () => {
       stop_sequences: [],
       return_likelihoods: 'NONE'
     });
-  setResult(`${response.body.generations}`);
+  setResult(`${response.body.generations[0].text}`);
 };
 
 const cohereBlogPostGenerator = async () => {
@@ -149,7 +141,7 @@ const cohereBlogPostGenerator = async () => {
     stop_sequences: [],
     return_likelihoods: 'NONE'
   });
-  setResult(`${response.body.generations}`);
+  setResult(`${response.body.generations[0].text}`);
 };
 
 const cohereBlogPostIntro = async () => {
@@ -165,7 +157,7 @@ const cohereBlogPostIntro = async () => {
         stop_sequences: [],
         return_likelihoods: 'NONE'
       });
-    setResult(`${response.body.generations}`);
+    setResult(`${response.body.generations[0].text}`);
   };
 
     console.log(prompt)
@@ -184,7 +176,6 @@ return (
                   placeholder="Enter a prompt"
               />
               <button
-                  onClick={generateArt}
                   className="bg-black text-white rounded-md p-2"
               >
                   Next
