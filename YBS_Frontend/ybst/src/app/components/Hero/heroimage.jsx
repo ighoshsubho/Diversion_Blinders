@@ -90,17 +90,18 @@ export const HeroImage = () => {
           <path pathLength="1" d="M220 777L220 1"></path>
           <path pathLength="1" d="M538 777L538 128"></path>
         </svg>
-
-        <Image
-          className={classNames(
-            "relative z-10 transition-opacity delay-[680ms]",
-            inView ? "opacity-100" : "opacity-0"
-          )}
-          src={Heroimage}
-          alt="Hero image"
-          width={1200}
-          height={1200}
-        />
+        <div className="px-16">
+          <Image
+            className={classNames(
+              "relative z-10  transition-opacity delay-[680ms]",
+              inView ? "opacity-100" : "opacity-0"
+            )}
+            src={Heroimage}
+            alt="Hero image"
+            width={1920}
+            height={1200}
+          />
+        </div>
       </div>
     </div>
   );
