@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
-function PostCreate() {
+function CreatePost() {
   const [prompt, setPrompt] = useState("");
   const [imageBlob, setImageBlob] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -75,6 +75,29 @@ function PostCreate() {
     }
   };
 
+  const getTextFromImage = async () => {
+    setLoading1(true);
+    try {
+      const response = await axios.post(
+        `https://api-inference.huggingface.co/models/${model}`,
+        {
+          headers: {
+            Authorization: "Bearer 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",
+          },
+          method: "POST",
+          inputs: prompt,
+        },
+        { responseType: "text" }
+      );
+      setResult(response.data);
+    } catch (err) {
+      console.log(err);
+      setError1(true);
+    } finally {
+      setLoading1(false);
+    }
+  };
+
   console.log(prompt);
   console.log(model);
   console.log(result);
@@ -124,4 +147,4 @@ function PostCreate() {
   );
 }
 
-export default PostCreate;
+export default CreatePost;

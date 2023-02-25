@@ -1,13 +1,10 @@
-// import CreatePost from "@/components/CreatePost";
-import PostCreate from "@/components/CreatePost";
-import Nftpost from "@/components/NftPost";
-import React from "react";
+import SampleCohere from "@/components/SampleCohere";
 
 const service = () => {
   return (
     <div>
-      <PostCreate />
-      <Nftpost />
+      <SampleCohere />
+      <p>Hi</p>
     </div>
   );
 };
