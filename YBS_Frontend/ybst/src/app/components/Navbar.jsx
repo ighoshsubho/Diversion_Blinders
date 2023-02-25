@@ -7,6 +7,7 @@ import classNames from "classnames";
 import Image from "next/image";
 import { Container } from "./container";
 import { Button } from "./Button";
+import Logo from "/src/app/assets/logo.webp";
 
 export const Navbar = () => {
   return (
