@@ -3,7 +3,8 @@ import CreatePost from "@/components/CreatePost";
 const service = () => {
   return (
     <div>
-      <CreatePost/>
+      <SampleCohere />
+
       <p>Hi</p>
     </div>
   );
