@@ -3,13 +3,13 @@ import classNames from "classnames";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import Heroimage from "/src/app/assets/heroimage.webp";
+// import Heroimage from "/src/app/assets/heroimage.webp";
 
 const randomNumberBetween = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-export const HeroImage = () => {
+export const HeroImage = ({ params, width, height }) => {
   const { ref, inView } = useInView({ threshold: 0.4, triggerOnce: true });
   const [lines, setLines] = useState([]);
   const timeoutRef = useRef(null);
@@ -96,10 +96,10 @@ export const HeroImage = () => {
               "relative z-10  transition-opacity delay-[680ms]",
               inView ? "opacity-100" : "opacity-0"
             )}
-            src={Heroimage}
+            src={params}
             alt="Hero image"
-            width={1920}
-            height={1200}
+            width={width}
+            height={height}
           />
         </div>
       </div>

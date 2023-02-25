@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { Button } from "./Button";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -44,7 +45,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen bg-page-gradient">
       <h1 className="text-3xl font-bold mb-4">Register</h1>
 
       <form className="w-1/3" onSubmit={handleSubmit}>
@@ -81,9 +82,14 @@ const Register = () => {
           />
         </div>
         <div className="flex  flex-row gap-4">
-          <button onClick={handleSubmit} type="submit">
+          <Button
+            onClick={handleSubmit}
+            variant="primary"
+            size="large"
+            type="submit"
+          >
             Register
-          </button>
+          </Button>
         </div>
         {error && <span className="">Already a member!</span>}
       </form>

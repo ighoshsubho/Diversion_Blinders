@@ -1,12 +1,13 @@
-import CreatePost from "@/components/CreatePost";
+// import CreatePost from "@/components/CreatePost";
 import React from "react";
 
-const about = () => {
+const service = () => {
   return (
     <div>
-      <CreatePost />
+      {/* //<CreatePost /> */}
+      <p>Hi</p>
     </div>
   );
 };
 
-export default about;
+export default service;
