@@ -1,6 +1,7 @@
 // import { Button, Highlight } from "../button";
 import Heroimage from "/src/app/assets/heroimage.webp";
 import { HeroImage } from "./heroimage";
+
 import { Hero, HeroSubtitle, HeroTitle } from "./herotitle";
 
 export const HomepageHero = () => (

@@ -1,11 +1,13 @@
 // import CreatePost from "@/components/CreatePost";
+import PostCreate from "@/components/CreatePost";
+import Nftpost from "@/components/NftPost";
 import React from "react";
 
 const service = () => {
   return (
     <div>
-      {/* //<CreatePost /> */}
-      <p>Hi</p>
+      <PostCreate />
+      <Nftpost />
     </div>
   );
 };
