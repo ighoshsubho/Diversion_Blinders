@@ -1,10 +1,11 @@
+'use client'
 import axios from "axios";
 import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
-function CreatePost() {
+function Prompt() {
   const [prompt, setPrompt] = useState("");
   const [imageBlob, setImageBlob] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -15,10 +16,6 @@ function CreatePost() {
   const [error1, setError1] = useState(null);
   const [model, setModel] = useState('EleutherAI/gpt-j-6B')
 
-  const [error2, setError2] = useState(null);
-  const [loading2, setLoading2] = useState(false);
-  const [result1, setResult1] = useState('')
-
   const logout = () => {
     sessionStorage.removeItem('Token')
     sessionStorage.removeItem('uid')
@@ -27,38 +24,15 @@ function CreatePost() {
 
 let router = useRouter();
 
-const getPromptForStableDiffusion = async () => {
-    setLoading2(true);
-    try{
-    const response = await axios.post(
-        `https://api-inference.huggingface.co/models/Gustavosta/MagicPrompt-Stable-Diffusion`,
-        {
-            headers: { Authorization: "Bearer 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" },
-            method: "POST",
-            inputs: prompt
-        },
-        { responseType: "text" }
-    );
-    setResult1(response.data);
-    }
-    catch (err){
-        console.log(err);
-        setError2(true)
-    }
-    finally{
-        setLoading2(false)
-    }
-  }
-
-const generateText = async () => {
+const getPrompts = async () => {
   setLoading1(true);
   try{
   const response = await axios.post(
-      `https://api-inference.huggingface.co/models/${model}`,
+      `https://api-inference.huggingface.co/models/Gustavosta/MagicPrompt-Stable-Diffusion`,
       {
-          headers: { Authorization: "Bearer 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" },
+          headers: { Authorization: "Bearer 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" },
           method: "POST",
-          inputs: prompt,
+          inputs: prompt
       },
       { responseType: "text" }
   );
@@ -73,38 +47,7 @@ const generateText = async () => {
   }
 }
 
-const generateArt = async () => {
-  setLoading(true)
-  try {
-      const response = await axios.post(
-          `https://mean-eggs-dream-34-124-168-229.loca.lt/text2img`,
-          {
-
-              "prompt": prompt,
-              "negative_prompt": "string",
-              "scheduler": "EulerAncestralDiscreteScheduler",
-              "image_height": 512,
-              "image_width": 512,
-              "num_images": 1,
-              "guidance_scale": 7,
-              "steps": 50,
-              "seed": 42,
-
-
-          }
-      );
-      (JSON.stringify(response.data.images))
-
-      setImageBlob(response.data.images);
-  } catch (err) {
-      console.log(err);
-      setError(true)
-  } finally {
-      setLoading(false)
-  }
-};
-
-const getTextFromImage = async () => {
+const generateText = async () => {
   setLoading1(true);
   try{
   const response = await axios.post(
@@ -143,7 +86,7 @@ return (
                   placeholder="Enter a prompt"
               />
               <button
-                  onClick={generateArt}
+                  onClick={getPrompts}
                   className="bg-black text-white rounded-md p-2"
               >
                   Next
@@ -159,11 +102,13 @@ return (
       </div>
       <div className="flex flex-col justify-center items-center">
                     <button
-                        onClick={generateText}
+                        onClick={getPrompts}
                         className="bg-[#2fd12f] text-white rounded-md p-3"
                     >
                         Next
                     </button>
+                    {error && <span className="">Bad Response!</span>}
+
                     {loading1 && <p>Loading...</p>}
 
                     {!loading1 && console.log(result)}
@@ -173,4 +118,4 @@ return (
 );
 }
 
-export default CreatePost;
+export default Prompt;
