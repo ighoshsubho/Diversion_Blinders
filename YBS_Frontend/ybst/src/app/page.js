@@ -1,4 +1,4 @@
-import { HomepageHero } from "./components/Hero/homepagehero";
+import { HomepageHero } from "../components/Hero/homepagehero";
 
 
 

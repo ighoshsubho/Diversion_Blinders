@@ -1,7 +1,12 @@
+import CreatePost from "@/components/CreatePost";
 import React from "react";
 
-const page = () => {
-  return <div>page</div>;
+const about = () => {
+  return (
+    <div>
+      <CreatePost />
+    </div>
+  );
 };
 
-export default page;
+export default about;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "./container";
 
-import Logo from "../assets/logo.webp";
+import Logo from "src/app/assets/logo.webp";
 
 import Image from "next/image";
 
