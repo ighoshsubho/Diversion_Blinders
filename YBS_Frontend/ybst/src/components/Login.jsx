@@ -44,11 +44,14 @@ const Login = () => {
 
       <form className="w-1/3" onSubmit={handleLogin}>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+          <label
+            htmlFor="email"
+            className="block text-gray-700 font-bold mb-2 text-2xl"
+          >
             Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xl"
             type="email"
             id="email"
             placeholder="Enter your email"
@@ -61,12 +64,12 @@ const Login = () => {
         <div className="mb-6">
           <label
             htmlFor="password"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-700 font-bold mb-2 text-2xl"
           >
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-background leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-background leading-tight focus:outline-none focus:shadow-outline text-2xl"
             type="password"
             id="password"
             placeholder="Enter your password"
