@@ -25,9 +25,7 @@ const About = () => {
           }
         </div>
       </HeroTitle>
-
-      {/* <HeroImage params={Desktop} width={500} height={500} /> */}
-      <div className="flex justify-center bg-hero-gradient">
+      <div className="flex justify-center">
         <Lottie animationData={teamAnimation} loop={true} />
       </div>
       <HeroSubtitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
