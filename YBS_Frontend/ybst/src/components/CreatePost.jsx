@@ -5,7 +5,7 @@ import Image from "next/image";
 import Typewriter from "typewriter-effect/dist/core";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import Typewriter from "typewriter-effect";
+
 import { Button } from "./Button";
 
 function CreatePost() {
