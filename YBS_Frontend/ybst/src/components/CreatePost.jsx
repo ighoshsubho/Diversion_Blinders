@@ -8,6 +8,7 @@ import React, { useState } from "react";
 
 import { Button } from "./Button";
 
+
 function CreatePost() {
   const [prompt, setPrompt] = useState("");
 
@@ -25,6 +26,7 @@ function CreatePost() {
   const logout = () => {
     sessionStorage.removeItem("Token");
     sessionStorage.removeItem("uid");
+    sessionStorage.removeItem("email");
     router.push("/login");
   };
 
@@ -62,6 +64,16 @@ function CreatePost() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    let token = sessionStorage.getItem('Token')
+    if (token) {
+        getData()
+    }
+    if (!token) {
+        router.push('/login')
+    }
+}, [])
 
   const cohere = require("cohere-ai");
   cohere.init(process.env.NEXT_APP_COHERE);
