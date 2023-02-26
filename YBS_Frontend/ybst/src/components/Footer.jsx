@@ -52,7 +52,7 @@ export const Footer = () => (
 
       <div>
         <div className="flex h-full flex-row justify-between lg:flex-col">
-          <Link href="/image">
+          <Link href="/">
             <Image src={Logo} alt="logo" height={100} width={100} />
           </Link>
         </div>

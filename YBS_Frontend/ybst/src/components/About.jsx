@@ -29,8 +29,8 @@ const About = () => {
         <Lottie animationData={teamAnimation} loop={true} />
       </div>
       <HeroSubtitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-        We are the most fantastic team of the world. Yes we are
-        <br className="hidden md:block" /> that helps the lives of people easy
+        We are a bunch of tech enthusiasts on a journey to explore the plethora of stacks in technology and aim to provide effective solutions to modern-day problems!
+        <br className="hidden md:block" /> 
       </HeroSubtitle>
     </Hero>
   );
