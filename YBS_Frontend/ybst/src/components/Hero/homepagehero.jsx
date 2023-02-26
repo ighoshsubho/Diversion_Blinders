@@ -7,13 +7,13 @@ export const HomepageHero = () => (
   <Hero>
     <HeroTitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
       <div className="py-15">
-        Every content writer's dream partner
+      Your. Brand. Stories.
         <br className="hidden md:block" /> 
       </div>
     </HeroTitle>
     <HeroSubtitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
       Your Brand. Your Stories.
-      <br className="hidden md:block" /> Your. Brand. Stories.
+      <br className="hidden md:block" /> Every content writer's dream partner
     </HeroSubtitle>
     <Button
       className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]"
