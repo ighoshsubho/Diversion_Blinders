@@ -9,30 +9,18 @@ const footerLinks = [
   {
     title: "Product",
     links: [
-      { title: "Text-To-Text", href: "/image" },
-      { title: "Text-To-Image", href: "/image" },
+      { title: "Text-To-Text", href: "/service" },
+      { title: "Text-To-Image", href: "/service" },
     ],
   },
   {
     title: "Company",
-    links: [{ title: "About us", href: "#" }],
+    links: [{ title: "About us", href: "/about" }],
   },
-  {
-    title: "Resources",
-    links: [
-      { title: "Community", href: "#" },
-      { title: "Contact", href: "#" },
 
-      { title: "Terms of service", href: "#" },
-    ],
-  },
   {
-    title: "Developers",
-    links: [
-      { title: "API", href: "#" },
-
-      { title: "GitHub", href: "#" },
-    ],
+    title: "Important Links",
+    links: [{ title: "GitHub", href: "#" }],
   },
 ];
 

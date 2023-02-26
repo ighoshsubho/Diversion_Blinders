@@ -2,7 +2,7 @@
 import axios from "axios";
 
 import Image from "next/image";
-import Typewriter from "typewriter-effect/dist/core";
+
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -37,14 +37,14 @@ function CreatePost() {
         `https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5`,
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_HUGGING_FACE}}`,
+            Authorization: `Bearer ${process.env.NEXT_APP_HUGGING_FACE}}`,
           },
           method: "POST",
           inputs: prompt,
         },
         { responseType: "blob" }
       );
-      // convert blob to a image file type
+
       const file = new File([response.data], "image.png", {
         type: "image/png",
       });
@@ -52,7 +52,7 @@ function CreatePost() {
       setFile(file);
       console.log(response);
       const url = URL.createObjectURL(response.data);
-      // console.log(url)
+
       console.log(url);
       setImageBlob(url);
     } catch (err) {
@@ -64,7 +64,7 @@ function CreatePost() {
   };
 
   const cohere = require("cohere-ai");
-  cohere.init("vPeFqvj73Z7fMyFDb99H27sbt1fSIQN44uqCu5TG"); // This is your trial API key
+  cohere.init(process.env.NEXT_APP_COHERE);
   const cohereGetParagraphGenerator = async () => {
     const response = await cohere.generate({
       model: "command-xlarge-nightly",
@@ -78,7 +78,7 @@ function CreatePost() {
       stop_sequences: [],
       return_likelihoods: "NONE",
     });
-    setResult(`${response.body.generations[0].text}`);
+    setResult(`${response.body.generations.text}`);
   };
 
   const cohereGetLinkedInPostGenerator = async () => {
@@ -129,44 +129,44 @@ function CreatePost() {
     setResult(`${response.body.generations[0].text}`);
   };
 
-  // console.log(prompt);
-  // console.log(model);
-  // console.log(result);
-  const contentpost = result;
+  let contentpost = 0;
+  contentpost = result;
   console.log(contentpost);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
-      <h1 className="text-4xl font-extrabold">AI Image Generator</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 bg-page-gradient py-6">
+      <h1 className="text-4xl font-sans">AI Image Generator</h1>
       <div className="flex flex-col items-center justify-center">
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4">
           <input
-            className="border-2 border-black rounded-md p-2 text-background"
+            className="border-2 text-2xl border-black rounded-full p-2 text-background font-light"
             onChange={(e) => setPrompt(e.target.value)}
             type="text"
             placeholder="Enter a prompt"
           />
-          <button
+          <Button
+            variant="primary"
+            size="large"
             onClick={generateArt}
-            className="bg-primary-gradient text-white rounded-md p-2"
+            className=" flex flex-col justify-center dark:bg-slate-600 bg-amber-200 lg:text-lg p-5  dark:text-white lg:text-violet-500"
           >
-            Next
-          </button>
+            <span>Image</span>
+          </Button>
+
           {loading && <p>Loading...</p>}
         </div>
         {imageBlob && (
           <div className="flex flex-col gap-4 items-center justify-center">
-            <img src={imageBlob} alt="AI generated image" />
+            <Image
+              src={imageBlob}
+              alt="AI generated image"
+              width={500}
+              height={500}
+            />
           </div>
         )}
       </div>
       <div className="flex flex-col justify-center items-center">
-        {/* <button
-          onClick={cohereBlogPostIntro}
-          className="bg-[#2fd12f] text-white rounded-md p-3"
-        >
-          Next
-        </button> */}
         {loading1 && <p>Loading...</p>}
 
         {!loading1 && console.log(result)}
@@ -196,26 +196,23 @@ function CreatePost() {
             size="large"
             title="BlogIntro"
             onClick={cohereBlogPostGenerator}
-            className="space-x-4"
+            className="space-x-4 px-10"
           >
-            <span>Blog Post </span>+
+            <span className="inline-block">Blog Post</span>
           </Button>
           <Button
             variant="primary"
             size="large"
             title="BlogPost"
             onClick={cohereBlogPostIntro}
-            className="justify-between"
+            className="justify-between inline-flex px-10"
           >
-            <span>Blog Intro </span>
+            <span>Blog Intro</span>
           </Button>
-          {/* <textarea defaultValue={postContent} /> */}
-          {/* <p>{contentpost}</p>
-           */}
         </div>
         <div className="p-auto">
           <>
-            <p className="p-10">{contentpost}</p>
+            <p className="p-10 inline-flex">{contentpost}</p>
           </>
         </div>
       </div>
